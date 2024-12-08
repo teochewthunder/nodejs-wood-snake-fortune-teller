@@ -16,24 +16,36 @@ app.get("/", (req, res)=> {
 });
 
 app.post("/fortune", (req, res)=> {
-	var headers = [
-		"Authorization: Bearer " + api.key,
-		"OpenAI-Oganization: " + api.org,
-		"Content-Type: application/json"
-	];
+	let fetch = require("node-fetch");
+
+	var headers = {
+		"Authorization": "Bearer " + api.key,
+		"OpenAI-Oganization": api.org,
+		"Content-Type": "application/json"		
+	};
 
 	var messages = [];
 	var obj = {
 		"role": "user",
-		"content" : "[prompt hre]"
+		"content" : "It is currently 2025. My birth date is " + req.body.txtBd + ". Using exactly 5 paragraphs give me 1) my Chinese Zodiac and element; 2) a personality profile for myself, and; 3) a fortune for love, money and health."
 	}
 	messages.push(obj);
 
-	var data = {
+	var body = {
 		"model": "gpt-3.5turbo",
 		"messages" : messages,
 		"max_tokens" : 2500
 	}
+
+	fetch("https://api.openai.com/v1/chat/completions", {
+		method: "POST",
+		headers: headers,
+		body: body
+	}).then(response => {
+		console.log(response);
+	}).catch(err => {
+		console.log(err);
+	});
 
 	res.render("form", { error: "test2", fortune: req.body.txtBd });
 });
