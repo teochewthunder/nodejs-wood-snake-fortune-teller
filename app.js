@@ -40,9 +40,9 @@ app.post("/fortune", (req, res)=> {
 	fetch("https://api.openai.com/v1/chat/completions", {
 		method: "POST",
 		headers: headers,
-		body: body
+		body: JSON.stringify(body)
 	}).then(response => {
-		console.log(response);
+		console.log(body, response);
 	}).catch(err => {
 		console.log(err);
 	});
