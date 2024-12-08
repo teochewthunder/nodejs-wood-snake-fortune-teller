@@ -16,7 +16,26 @@ app.get("/", (req, res)=> {
 });
 
 app.post("/fortune", (req, res)=> {
-	res.render("form", { error: "test2", fortune: "" });
+	var headers = [
+		"Authorization: Bearer " + api.key,
+		"OpenAI-Oganization: " + api.org,
+		"Content-Type: application/json"
+	];
+
+	var messages = [];
+	var obj = {
+		"role": "user",
+		"content" : "[prompt hre]"
+	}
+	messages.push(obj);
+
+	var data = {
+		"model": "gpt-3.5turbo",
+		"messages" : messages,
+		"max_tokens" : 2500
+	}
+
+	res.render("form", { error: "test2", fortune: req.body.txtBd });
 });
 
 app.use((req, res, next)=> {
