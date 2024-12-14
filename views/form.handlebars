@@ -2,9 +2,10 @@
 
 <form action="/fortune" id="formFortune" method="POST">
 	<input type="date" name="txtBd" id="txtBd" value="2025-01-01" onChange="bdChange();" />
-	<div class="error" id="errorContainer">{{ error }}</div>
-	<div class="fortune" id="fortuneContainer"> {{{ fortune }}}</div>
 </form>
+
+<div class="error" id="errorContainer">{{ error }}</div>
+<div class="fortune" id="fortuneContainer"> {{{ fortune }}}</div>
 
 <script>
 	function bdChange() {
