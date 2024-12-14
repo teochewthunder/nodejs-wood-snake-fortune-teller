@@ -27,12 +27,12 @@ app.post("/fortune", (req, res)=> {
 	var messages = [];
 	var obj = {
 		"role": "user",
-		"content" : "It is currently 2025. My birth date is " + req.body.txtBd + ". Using exactly 5 paragraphs give me 1) my Chinese Zodiac and element; 2) a personality profile for myself, and; 3) a fortune for love, money and health."
+		"content" : "It is currently 2025. My birth date is " + req.body.txtBd + ". Using exactly 5 paragraphs give me my Chinese Zodiac and element I also want a personality profile for myself. Lastly, provide a fortune for love, money and health."
 	}
 	messages.push(obj);
 
 	var body = {
-		"model": "gpt-3.5turbo",
+		"model": "gpt-3.5-turbo",
 		"messages" : messages,
 		"max_tokens" : 2500
 	}
@@ -41,13 +41,17 @@ app.post("/fortune", (req, res)=> {
 		method: "POST",
 		headers: headers,
 		body: JSON.stringify(body)
-	}).then(response => {
-		console.log(body, response);
-	}).catch(err => {
-		console.log(err);
+	})
+	.then(response => response.text())
+	.then(data => { 
+		var json_data = JSON.parse(data);
+		console.log(json_data.choices);
+		var html_content =  json_data.choices[0].message.content.replaceAll("\n\n", "<br /><br />");
+		res.render("form", { error: "", fortune: html_content });
+	})
+	.catch(err => {
+		res.render("form", { error: err, fortune: "" });
 	});
-
-	res.render("form", { error: "test2", fortune: req.body.txtBd });
 });
 
 app.use((req, res, next)=> {

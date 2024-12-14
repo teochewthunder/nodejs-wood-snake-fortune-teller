@@ -3,7 +3,7 @@
 <form action="/fortune" id="formFortune" method="POST">
 	<input type="date" name="txtBd" id="txtBd" value="2025-01-01" onChange="bdChange();" />
 	<div class="error" id="errorContainer">{{ error }}</div>
-	<div class="fortune" id="fortuneContainer"> {{ fortune }}</div>
+	<div class="fortune" id="fortuneContainer"> {{{ fortune }}}</div>
 </form>
 
 <script>
@@ -11,6 +11,7 @@
 		var errorContainer = document.getElementById("errorContainer");
 		var txtBd = document.getElementById("txtBd");	
 		var formFortune = document.getElementById("formFortune");
+		var fortuneContainer = document.getElementById("fortuneContainer");
 
 		var d = new Date();
 		var bd = new Date(txtBd.value);
@@ -18,6 +19,8 @@
 		if (bd.getTime() > d.getTime()) {
 			errorContainer.innerHTML = "Error! You can't possibly be born in the future.";
 		} else {
+			errorContainer.innerHTML = "";
+			fortuneContainer.innerHTML = "Please wait..."
 			formFortune.submit();
 		}
 	}
