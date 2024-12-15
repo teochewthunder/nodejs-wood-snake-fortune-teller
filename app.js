@@ -10,7 +10,7 @@ app.set("view engine", "handlebars");
 app.set("port", process.env.PORT || 3000);
 
 app.use(require("body-parser")());
-app.use(express.static("img"));
+app.use(express.static("assets"));
 
 app.get("/", (req, res)=> {
 	res.render("form", { error: "", fortune: "To get your fortune in the year 2025, please provide your birth date." });
