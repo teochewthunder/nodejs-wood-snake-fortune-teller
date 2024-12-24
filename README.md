@@ -9,7 +9,7 @@ An Example of using `Fetch` to get data via an API endpoint.
 
 ## Routes
 - `/`: Default. Displays the form.
-- `process`: POST. This is run when form is submitted. Data from the form is used as a prompt for `ChatGPT`.
+- `fortune`: POST. This is run when form is submitted. Data from the form is used as a prompt for `ChatGPT`.
 - `500`: This is run when an error occurs.
 - `404`: This is run when the requested route does not exist.
 
