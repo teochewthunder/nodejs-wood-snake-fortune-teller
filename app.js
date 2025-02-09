@@ -23,13 +23,13 @@ app.post("/fortune", (req, res)=> {
 		"Authorization": "Bearer " + api.key,
 		"OpenAI-Oganization": api.org,
 		"Content-Type": "application/json"		
-	};
+	};	
 
 	var messages = [];
 	var obj = {
 		"role": "user",
 		"content" : "It is currently 2025. My birth date is " + req.body.txtBd + ". Using exactly 5 paragraphs give me my Chinese Zodiac and element I also want a personality profile for myself. Lastly, provide a fortune for love, money and health."
-	}
+	};
 	messages.push(obj);
 
 	var body = {
@@ -52,7 +52,7 @@ app.post("/fortune", (req, res)=> {
 	})
 	.catch(err => {
 		res.render("form", { error: err, fortune: "" });
-	});
+	});	
 });
 
 app.use((req, res, next)=> {
